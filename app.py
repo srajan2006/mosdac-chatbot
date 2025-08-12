@@ -1,26 +1,39 @@
+# app.py
 import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import os
+from dotenv import load_dotenv
 import google.generativeai as genai
 
-# ---- Load API Key from Streamlit secrets ----
-GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", None)
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-else:
-    st.error("Please set GEMINI_API_KEY in Streamlit secrets.")
+# -------------------- Load Environment Variables --------------------
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    st.error("❌ GEMINI_API_KEY not found in .env file")
     st.stop()
 
-# ---- Load Knowledge Base ----
-df = pd.read_csv("data.csv")
+genai.configure(api_key=GEMINI_API_KEY)
 
-# ---- Create TF-IDF Matrix ----
-vectorizer = TfidfVectorizer()
-tfidf_matrix = vectorizer.fit_transform(df['content'].tolist())
+# -------------------- Load Knowledge Base --------------------
+@st.cache_data
+def load_data(file_path):
+    return pd.read_csv(file_path)
 
-# ---- Helper: Search ----
+df = load_data("data.csv")
+
+# -------------------- Create TF-IDF Matrix --------------------
+@st.cache_resource
+def create_vectorizer(data):
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(data['content'].tolist())
+    return vectorizer, tfidf_matrix
+
+vectorizer, tfidf_matrix = create_vectorizer(df)
+
+# -------------------- Retrieve Relevant Context --------------------
 def retrieve_answer(query, top_k=2):
     query_vec = vectorizer.transform([query])
     scores = (tfidf_matrix * query_vec.T).toarray()
@@ -28,34 +41,35 @@ def retrieve_answer(query, top_k=2):
     context = "\n".join(df.iloc[idx]['content'] for idx in ranked_indices)
     return context
 
-# ---- Helper: Ask Gemini ----
+# -------------------- Ask Gemini API --------------------
 def ask_gemini(question, context):
     prompt = f"Answer the question based only on the context below:\n\n{context}\n\nQuestion: {question}"
     model_g = genai.GenerativeModel("gemini-pro")
     response = model_g.generate_content(prompt)
-    return response.text
+    return response.text.strip()
 
-# ---- UI ----
+# -------------------- Streamlit UI --------------------
 st.set_page_config(page_title="MOSDAC Query Chatbot", page_icon="🛰️")
-
 st.title("🛰️ MOSDAC Query Chatbot")
 st.write("Ask me about satellites or MOSDAC data access.")
 
 # Login / Guest mode
 mode = st.radio("Choose mode:", ["Guest", "Login"])
+
 if mode == "Login":
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if username and password:
-        st.success(f"Logged in as {username}")
+        st.success(f"✅ Logged in as {username}")
 else:
     st.info("You are in Guest mode.")
 
 # Chat input
 user_q = st.text_input("Your question:")
+
 if st.button("Ask"):
     if user_q.strip():
         context = retrieve_answer(user_q)
         answer = ask_gemini(user_q, context)
-        st.write("**Answer:**", answer)
-        st.caption("Sources: Based on MOSDAC and satellite facts dataset.")
+        st.markdown(f"**Answer:** {answer}")
+        st.caption("📚 Sources: Based on MOSDAC and satellite facts dataset.")
