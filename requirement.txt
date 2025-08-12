@@ -1,6 +1,6 @@
 streamlit
 pandas
 faiss-cpu
-sentence-transformers
+scikit-learn
 numpy
 google-generativeai

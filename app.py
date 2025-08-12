@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-from sentence_transformers import SentenceTransformer
-import faiss
+from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import os
 import google.generativeai as genai
@@ -17,20 +16,16 @@ else:
 # ---- Load Knowledge Base ----
 df = pd.read_csv("data.csv")
 
-# ---- Create Embeddings ----
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(df['content'].tolist())
-
-# ---- Create FAISS index ----
-dimension = embeddings.shape[1]
-index = faiss.IndexFlatL2(dimension)
-index.add(np.array(embeddings))
+# ---- Create TF-IDF Matrix ----
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(df['content'].tolist())
 
 # ---- Helper: Search ----
 def retrieve_answer(query, top_k=2):
-    query_vec = model.encode([query])
-    distances, indices = index.search(np.array(query_vec), top_k)
-    context = "\n".join(df.iloc[idx]['content'] for idx in indices[0])
+    query_vec = vectorizer.transform([query])
+    scores = (tfidf_matrix * query_vec.T).toarray()
+    ranked_indices = np.argsort(scores[:, 0])[::-1][:top_k]
+    context = "\n".join(df.iloc[idx]['content'] for idx in ranked_indices)
     return context
 
 # ---- Helper: Ask Gemini ----
