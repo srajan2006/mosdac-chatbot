@@ -44,7 +44,7 @@ def retrieve_answer(query, top_k=2):
 # -------------------- Ask Gemini API --------------------
 def ask_gemini(question, context):
     prompt = f"Answer the question based only on the context below:\n\n{context}\n\nQuestion: {question}"
-    model_g = genai.GenerativeModel("gemini-pro")
+    model_g = genai.GenerativeModel("gemini-1.5-flash")
     response = model_g.generate_content(prompt)
     return response.text.strip()
 
