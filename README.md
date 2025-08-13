@@ -30,10 +30,11 @@ mosdac-chatbot/
 │-- utils/ # Helper scripts and functions
 
 You can try the chatbot here:
-[![🔗 MOSDAC Chatbot Live Demo]](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
+🔗 MOSDAC Chatbot Live Demo(https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
 
 
 👥 Collaborators
+
 Name	        GitHub
 Srajan Gupta	@srajan2006
 Rishabh-43	  @Rishabh-43
