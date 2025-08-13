@@ -23,10 +23,14 @@
 ---
 
 ## 📂 Project Structure
-mosdac-chatbot/
-│-- app.py # Main Streamlit application
-│-- requirements.txt # Dependencies
-│-- datasets/ # Dataset files
+mosdac-chatbot/  
+
+│-- app.py # Main Streamlit application 
+
+│-- requirements.txt # Dependencies 
+
+│-- datasets/ # Dataset files 
+
 │-- utils/ # Helper scripts and functions
 
 You can try the chatbot here:
