@@ -1,0 +1,6 @@
+product_name,product_url,sensor_info
+E06OCM_L2C_LAC_AD,https://mosdac.gov.in/discovery/L2OCM_LAC_AD.jsp,OCM-3
+E06SCAT_L2C_LAC_AD,https://mosdac.gov.in/discovery/L2SCAT_LAC_AD.jsp,SCAT-3
+E06SSTM_L2C_LAC_AD,https://mosdac.gov.in/discovery/L2SSTM_LAC_AD.jsp,SSTM
+INSAT3D_FDI_L2,https://mosdac.gov.in/discovery/INSAT3D_L2.jsp,Imager & Sounder
+INSAT3DR_FDI_L2,https://mosdac.gov.in/discovery/INSAT3DR_L2.jsp,Imager & Sounder
