@@ -2,7 +2,7 @@
 
 > A Streamlit-powered chatbot that answers queries using MOSDAC datasets and the Google Gemini API.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=streamlit)](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
+[Live Demo](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red?style=for-the-badge&logo=streamlit)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
@@ -30,11 +30,4 @@ mosdac-chatbot/
 │-- utils/ # Helper scripts and functions
 
 You can try the chatbot here:
-🔗 MOSDAC Chatbot Live Demo(https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
-
-
-👥 Collaborators
-
-Name	        GitHub
-Srajan Gupta	@srajan2006
-Rishabh-43	  @Rishabh-43
+[🔗 MOSDAC Chatbot Live Demo](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
