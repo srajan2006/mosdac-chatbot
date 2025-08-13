@@ -10,7 +10,7 @@
 ---
 
 ## 📸 Preview
-*(<img width="1919" height="980" alt="image" src="https://github.com/user-attachments/assets/f9dfde6e-ee19-41a7-a1f5-118696b5e867" />)*
+*<img width="1919" height="980" alt="image" src="https://github.com/user-attachments/assets/f9dfde6e-ee19-41a7-a1f5-118696b5e867" />*
 
 ---
 
@@ -30,7 +30,7 @@ mosdac-chatbot/
 │-- utils/ # Helper scripts and functions
 
 You can try the chatbot here:
-[![🔗 MOSDAC Chatbot Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=streamlit)](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
+[![🔗 MOSDAC Chatbot Live Demo]](https://mosdac-chatbot-cfvvm3embzpnkg84cxqh7f.streamlit.app/)
 
 
 👥 Collaborators
