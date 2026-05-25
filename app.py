@@ -109,7 +109,7 @@ def retrieve_answer(query, top_k=2):
 # -------------------- Ask Gemini --------------------
 def ask_gemini(question, context):
     prompt = f"Answer based on the context below:\n\n{context}\n\nQuestion: {question}"
-    model_g = genai.GenerativeModel("gemini-1.5-flash")
+    model_g = genai.GenerativeModel("gemini-2.5-flash")
     return model_g.generate_content(prompt).text.strip()
 
 # -------------------- UI --------------------
